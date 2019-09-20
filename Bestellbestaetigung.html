@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="utf-8"> <!-- utf-8 WICHTIG FÜR UMLAUTE UND SONDERZEICHEN! -->
+    <meta name="viewport" content="width=device-width"> <!-- viewport auf Gerätebreite zwingen, sollte dank media queries unnötig sein aber sichi ist sichi-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!--Edge IE rendering -->
+    <meta name="x-apple-disable-message-reformatting">  <!-- Auto-Scale von iOS 10 deaktivieren -->
+    <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no"> <!-- iOS soll keine unnötigen Links einbauen -->
+    <title></title> 									<!--!!!  TITEL  !!! -->
+
+	
+	<!-- Code zum importieren von Webfonts, falls benötigt --> 
+	
+    <!-- Web Font / @font-face : Anfang -->
+		
+    <!-- Desktop Outlook chokes on web font references and defaults to Times New Roman, so we force a safe fallback font. -->
+    <!--[if mso]>
+        <style>
+            * {
+                font-family: sans-serif !important;
+            }
+        </style>
+    <![endif]-->
+
+    <!-- Wichtige Info zu webfonts im e-mail format http://stylecampaign.com/blog/2015/02/webfont-support-in-email/ -->
+    <!--[if !mso]><!-->
+    <!-- insert web font reference, eg: <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'> -->
+    <!--<![endif]-->
+
+    <!-- Web Font / @font-face : END -->
+
+    <!-- CSS für responsives Design : Anfang -->
+    <style>
+
+        /* Stellen außerhalb der mail werden abgeschnitten */
+        /* Koennte ein Window zerstören - besser nicht bearbeiten */
+        html,
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            height: 100% !important;
+            width: 100% !important;
+        }
+
+        /* Kleine Texte nicht neu ausrichten */
+        * {
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* Emails auf Android zentrieren */
+        div[style*="margin: 16px 0"] {
+            margin: 0 !important;
+        }
+
+        /* Outlook soll tabellen nicht kaputt machen! */
+        table,
+        td {
+            mso-table-lspace: 0pt !important;
+            mso-table-rspace: 0pt !important;
+        }
+
+        /* font weight */
+        th {
+        	font-weight: normal;
+        }
+
+        /* Fix für Padding Probleme */
+        table {
+            border-spacing: 0 !important;
+            border-collapse: collapse !important;
+            table-layout: fixed !important;
+            margin: 0 auto !important;
+        }
+
+        /* Keine underlines ohne Wunsch */
+        a {
+            text-decoration: none;
+        }
+
+        /* Bildgrößen in IE mit bicubic rendern - speicherplatz wird gespart */
+        img {
+            -ms-interpolation-mode:bicubic;
+        }
+
+        /* Workaround für verschiedene iOS mail probleme - Hab ich von GitHub */
+        a[x-apple-data-detectors],  /* iOS */
+        .unstyle-auto-detected-links a,
+        .aBn {
+            border-bottom: 0 !important;
+            cursor: default !important;
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+        }
+
+        /* Gmail Farbänderung vorgreifen */
+        .im {
+            color: inherit !important;
+        }
+
+        /* Kein Gmail download button für img's */
+        .a6S {
+           display: none !important;
+           opacity: 0.01 !important;
+		}
+		/* .g-img Klasse für Bilder die trotzdem einen DL button bei Gmail bekommen  */
+		img.g-img + div {
+		   display: none !important;
+		}
+
+        /* Rechtes Gitter in Gmail iOS entfernen : https://github.com/TedGoas/Cerberus/issues/89  */
+        /* neue Viewports können für entsprechende Gerätegrößen erstellt werden */
+
+        /* iPhone 4, 4S, 5, 5S, 5C, and 5SE */
+        @media only screen and (min-device-width: 320px) and (max-device-width: 374px) {
+            u ~ div .email-container {
+                min-width: 320px !important;
+            }
+        }
+        /* iPhone 6, 6S, 7, 8, and X */
+        @media only screen and (min-device-width: 375px) and (max-device-width: 413px) {
+            u ~ div .email-container {
+                min-width: 375px !important;
+            }
+        }
+        /* iPhone 6+, 7+, and 8+ */
+        @media only screen and (min-device-width: 414px) {
+            u ~ div .email-container {
+                min-width: 414px !important;
+            }
+        }
+
+    </style>
+
+    <!-- CSS Responsive : Ende -->
+
+    <!-- Direktes CSS für Layout -->
+    <style>
+
+        /* Hover styles für buttons */
+        .button-td,
+        .button-a {
+            transition: all 100ms ease-in;
+        }
+	    .button-td-primary:hover,
+	    .button-a-primary:hover {
+	        background: #555555 !important;
+	        border-color: #555555 !important;
+	    }
+
+        /* Medien abfragen - maximale bildschirm breite 600 pixel */
+        @media screen and (max-width: 600px) {
+
+            .email-container {
+                width: 100% !important;
+                margin: auto !important;
+            }
+
+            /* Tabellen zeilen zu reihen über die ganze Breite wandeln */
+            .stack-column,
+            .stack-column-center {
+                display: block !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                direction: ltr !important;
+            }
+            /* Stack column in die Mitte (centered) */
+            .stack-column-center {
+                text-align: center !important;
+            }
+
+            /* !! Wichtige Klasse zum Centern !!    .center-on-narrow */
+            .center-on-narrow {
+                text-align: center !important;
+                display: block !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                float: none !important;
+            }
+            table.center-on-narrow {
+                display: inline-block !important;
+            }
+
+            /* Schriftgröße auf kleinen Bildschirmen anpassen */
+            .email-container p {
+                font-size: 17px !important;
+            }
+        }
+		
+		.entryH { color:#15b59e, font-size:1.2em;font-weight:bold; padding-bottom:5px;border-bottom:1px; solid: #15b59e; display:block;  font-family: sans-serif;}
+		.entryH2 { }
+		.link1 { color: #15b59e; !important}
+		
+
+    </style>
+    <!-- CSS für direkte Styles : ENDE -->
+
+</head>
+<!--
+	Hintergrundfarbe der e-mail (#222222) ist an 3 stellen definiert:
+	1. body tag: Für die meisten Endgeräte
+	2. center tag: Für Gmail, Inbox mobile apps und web clients von Gmail, GSuite, Inbox, Yahoo, AOL, Libero, Comcast, freenet, Mail.ru, Orange.fr
+	3. -Mso- tag für den Windows 10 mailclient
+-->
+<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #FFFFFF;">
+	<center style="width: 100%; background-color: #FFFFFF;">
+    <!--[if mso | IE]>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #222222;">
+    <tr>
+    <td>
+    <![endif]-->
+
+        <!-- Dieser Text wird in der Inbox Vorschau angezeigt - wenn nicht von uns eingefügt wird automatisch der "erste Text" in der Mail benutzt  -->
+        <div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
+            Vielen Dank für deine Bestellung bei Liquid-Life.de!! Deine Bestellung ist jetzt in bearbeitung. Bei Fragen oder weiteren wünschen kontaktiere bitte unser Verkaufsteam direkt im Chat auf Liquid-Life.de oder per mail unter Verkauf@Liquid-Life.de 
+        </div>
+        <!-- Preheader Text zuende -->
+
+        <!-- Inbox preview lock - GitHub  -->
+        <!-- Preview Text Spacing Hack : BEGIN -->
+        <div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
+            &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
+        </div>
+        <!-- Preview Text Spacing Hack : END -->
+
+        <!-- Email Body : BEGIN -->
+        <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="margin: auto;" class="email-container">
+	        <!-- Email Header : BEGIN -->
+            <tr>
+                <td style="padding: 20px 0; text-align: center">
+                    <img src="https://www.liquid-life.de/u/greedy/lllogobestellung.png" width="200" height="50" alt="alt_text" border="0" style="height: auto; background: #FFFFFF; font-family: sans-serif; font-size: 15px; line-height: 15px; color: #FFFFFF;">
+                </td>
+            </tr>
+	        <!-- Email Header : END -->
+
+            <!-- Überschrift / Eingangsbenachrichtigung  -->
+            <tr>
+                <td style="background-color: #ffffff;">
+                    <p class="entryH"> Vielen Dank für deine Bestellung bei <a style="color:#15b59e;" href="https://www.Liquid-life.de">Liquid-Life.de</a> </p> 	
+				</td>
+            </tr>
+			<tr>
+			<td style="background-color: #ffffff;"> 
+				<p class="entryH2" style="margin: 0 0 10px; font-size: 18px; line-height: 15px; color: #black; padding: 20px; font-family: sans-serif;"> Hallo ^KUNDE_VORNAME^ ,</p>
+				</td>
+			</tr>
+			<tr> 
+			<td style="background-color: #ffffff;" >
+				<p style="padding:0px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; margin: 0 0 0 20px;"><strong> vielen Dank</strong> für deine Bestellung ^RECHNR^ vom ^RECHDATUM^. <br> </p>
+				<p style="margin: 0 0 0 20px; font-family: sans-serif; color: #15b59e; font-weight: bold">Dein Auftrag wird schnellstmöglich bearbeitet</p>
+				
+			</td>
+			</tr>
+            <!-- Hero Image, Flush : END -->
+ 
+            <!-- 1 Column Text + Button : BEGIN -->
+            <tr>
+                <td style="background-color: #ffffff;">
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr>
+                            <td style="padding: 20px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
+                                <p style="margin: 0 0 0 20px; font-family: sans-serif;"> Deine Bestellung ist aktuell in Bearbeitung.<br> Wenn du noch Fragen haben solltest oder zusätzliche Hilfe <br> zu Deiner Bestellung benötigst kannst Du dich gerne direkt an unser Verkaufsteam unter <a href="Mailto:verkauf@liquid-life.de" class="link1"><strong> verkauf@liquid-life.de </strong></a> melden. </p>
+							</td> 
+							<tr>
+								<td>
+									<p style="margin: 0 0 0 20px; font-family: sans-serif;"> Unser Support steht dir von Montags bis Freitags von 10-18 Uhr,<br> sowie Samstags von 10-14 Uhr zur Verfügung.<br>Telefonisch oder direkt im Live-Chat auf <a class="link1" href="http://www.liquid-life.de">www.Liquid-Life.de</a></p>
+									<tr> 
+										<td>
+									<ul style="padding: 0 0 0 0px; margin: 0 0 0px 0px; list-style-type: none;">
+									<li style="margin: 0 0 0 20px; margin-top: 30px; font-family: sans-serif;">Sportliche Grüße,</li>
+									<li style="margin: 0 0 0 20px; font-family: sans-serif;">dein <a class="link1" href="https://www.liquid-life.de"><strong>Liquid-Life.de Team</strong></a> </li>
+								</ul>
+											
+										</td>
+									
+										
+										
+									</tr>
+								
+                            </td>
+					
+			</tr> </tr>
+                        <tr>
+                            <td style="padding: 0 20px 20px;">
+								
+								
+								
+								<!-- HIER KANN MAN EINEN STYLEBAREN UND BENUTZBAREN BUTTON ZUR BENUTZUNG FINDEN -->								
+                                <!-- Button : BEGIN
+                                <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: auto;">
+                                    <tr>
+                                        <td class="button-td button-td-primary" style="border-radius: 4px; background: #FFFFFF;">
+											<a class="button-a button-a-primary" href="https://google.com/" style="background: #FFFFFF; border: 1px solid #000000; font-family: sans-serif; font-size: 15px; line-height: 15px; text-decoration: none; padding: 13px 17px; color: #ffffff; display: block; border-radius: 4px;">Centered Primary Button</a>
+										</td>
+                                    </tr>
+                                </table>
+                                     Button : END -->
+                            </td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+            <!-- 1 Column Text + Button : END -->
+
+            <!-- HIER KÖNNTE ICH ZWISCHEN ZWEI TABELLEN INHALT AUF DEM HINTERGRUND EINFÜGEN : -->
+            <tr>
+                <!-- Bulletproof Background Images c/o https://backgrounds.cm            
+					 HINTERGRUND BILD background-image: url('https://via.placeholder.com/600x230/222222/666666')
+					<p style="margin: 0;"> Ja moin ich platzhaltere das </p>
+						-->
+                <td valign="middle" style="text-align: center; background-color: #ffffff; background-position: center center !important; background-size: cover !important;">
+	                <!--[if gte mso 9]>
+	                <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;height:175px; background-position: center center !important;">
+	                <v:fill type="tile" src="https://via.placeholder.com/600x230/222222/666666" color="#222222" />
+	                <v:textbox inset="0,0,0,0">
+	                <![endif]-->
+	                <div>
+	                    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+	                        <tr>
+	                            <td valign="middle" style="text-align: center; padding: 40px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #ffffff;">
+	                            </td>
+	                        </tr>
+	                    </table>
+	                </div>
+	                <!--[if gte mso 9]>
+	                </v:textbox>
+	                </v:rect>
+	                <![endif]-->
+	            </td>
+	        </tr>
+	        <!-- Background Image with Text : END -->
+
+	        <!-- 2 gleichhohe Columns : BEGIN -->
+	        <tr>
+	            <td style="padding: 10px; background-color: #ffffff;">
+	                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+	                    <tr>
+	                        <!-- Column1 : Anfang -->
+	                        <th valign="top" width="50%" class="stack-column-center">
+	                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+	                                <tr>
+	                                    <td style="font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; padding: 0 10px 10px; text-align: left;" class="center-on-narrow">
+	                                        <p style="margin: 0; color:#15b59e; font-size: 25px; font-weight: bold ;">Anschrift</p>
+												<ul style="padding: 0px; margin-top: 10px; list-style-type: none;">
+													<li style=""> </li>
+													<li style="">Liquid Life GmbH</li>
+													<li style="">Keffelkerstraße 12 </li>
+													<li style="">559929 Brilon Deutschland </li>
+													<li style="margin-top: 20px">Amtsgericht Arnsberg, HRB9019 </li>
+													<li style="">UST-ID.: DE269204627 </li>
+													<li style="">Steuer Nr.: 30957116136</li>
+													<li style="">Geschäftsführer: Dominic Neumann </li>									
+												</ul>
+	                                    </td>
+	                                </tr>
+	                            </table>
+	                        </th>
+	                        <!-- Column1 : Ende -->
+	                      <!-- Zweite Column - Ist für eine Reihe mit einer 2. Tabelle auf der gleichen höhe -width auf 50% setzen und wir haben 2 gleich hohe Tabellen -->
+	                        <th valign="top" width="50%" class="stack-column-center">
+	                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+	                                    <td style="font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; padding: 0 10px 10px; text-align: left;" class="center-on-narrow">
+	                                        <p style="margin: 0; font-size: 25px; font-weight: bold; color: #15b59e;">Kontakt</p>
+												<ul style="padding: 0px; margin-top: 10px; list-style-type: none;">
+													<li style=""> </li>
+													<li style="">Telefon: 02961 / 91 48 86 9</li>
+													<li style="margin-top: 5px;">E-mail uns an: <a href="mailto:info@liquid-life.de" class="link1">Info@Liquid-Life.de</a></li>
+													<li style="margin-top: 30px;">Besuche nochmal unseren Shop </li>
+													<li style="">Die neuesten Angebote erwarten dich:</li>
+													<li style=""><a href="https://www.Liquid-life.de" class="link1"><Strong>www.Liquid-Life.de</Strong></a></li>	
+												</ul>
+	                                    </td>
+	                                </tr>
+	                            </table>
+	                        </th>
+	                        <!-- Column2 : Ende --> 
+	                    </tr>
+	                </table>
+	            </td>
+	        </tr>
+	        <!-- 2 Gleichhohe Tabellenspalten : Ende -->
+			<!-- ENDE DES HAUPTTEILS --> 
+	        <!-- Thumbnail Left, Text Right : BEGIN -->
+	        <tr>
+	            <td dir="ltr" width="100%" style="padding: 10px; background-color: #ffffff;">
+	                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+	                    <tr>
+	                        <!-- Column : BEGIN -->
+	                        <th width="33.33%" class="stack-column-center">
+	                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+	                                <tr>
+	                                    <td dir="ltr" valign="top" style="padding: 0 10px;">
+	                                        <img src="https://www.liquid-life.de/blog/wp-content/uploads/2019/09/Cube-Ständer.png" width="170" height="170" alt="alt_text" border="0" class="center-on-narrow" style="height: auto; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 15px; color: #555555;">
+	                                    </td>
+	                                </tr>
+	                            </table>
+	                        </th>
+	                        <!-- Column : END -->
+	                        <!-- Column : BEGIN -->
+	                        <th width="66.66%" class="stack-column-center">
+	                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+	                                <tr>
+	                                    <td dir="ltr" valign="top" style="font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; padding: 10px; text-align: left;" class="center-on-narrow">
+	                                        <h2 style="margin: 0 0 10px 0; font-family: sans-serif; font-size: 18px; line-height: 22px; color: #333333; font-weight: bold;">Vielleicht interessiert dich auch: </h2>
+	                                        <p style="margin: 0 0 10px 0;">Der <Strong> Cube Cubestand Pro </Strong> Ständer ist für alle CUBE Fahrräder geeignet, die das SIC CUBE Logo haben. Beispielsweise auch gut geeignet für Global Travel Series oder Cross Lite Series </p>
+	                                        <!-- Button : BEGIN -->
+	                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" class="center-on-narrow" style="float:left;">
+	                                            <tr>
+		                                            <td class="button-td button-td-primary" style="border-radius: 4px; background: #FFFFFF;">
+														<a class="button-a button-a-primary" href="https://www.liquid-life.de/cube/cube-cubestand-pro.html" style="background: #15b59e; border: 1px solid #eaeaea; font-family: sans-serif; font-size: 15px; line-height: 15px; text-decoration: none; padding: 13px 17px; color: #ffffff; display: block; border-radius: 4px;">Zum Shop</a>
+													</td>
+	                                          </tr>
+	                                      </table>
+	                                      <!-- Button : END -->
+	                                    </td>
+	                                </tr>
+								</table>
+	                        </th>
+	                        <!-- Column : END -->
+	                    </tr>
+	                </table>
+	            </td>
+	        </tr>
+	        <!-- Thumbnail Left, Text Right : END -->
+
+	 
+
+
+
+
+
+
+
+
+	        <!-- Thumbnail Right, Text Left : END -->
+
+	        <!-- Clear Spacer : BEGIN -->
+	        <tr>
+	            <td aria-hidden="true" height="40" style="font-size: 0px; line-height: 0px;">&nbsp;
+	                
+	            </td>
+	        </tr>
+	        <!-- Clear Spacer : END -->
+
+	        <!-- 1 Column Text : BEGIN -->
+	        <tr>
+	            <td style="background-color: #ffffff;">
+	                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+	                    <tr>
+	                        <td style="padding: 20px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
+	                           <p style="margin: 0; color:#black; font-size: 20px; font-weight: bold ;">WIDERRUFSRECHT</p>
+									<details>
+										<summary> Sie Können Ihre Vertragserklärung[...]</summary>
+								<p>       
+									innerhalb von 14 Tagen ohne Angabe von Gründen in Textform (z. B. Brief, Fax, E-Mail) oder - wenn Ihnen die Sache vor Fristablauf überlassen wird - durch Rücksendung der Sache widerrufen. Die Frist beginnt nach Erhalt dieser Belehrung in Textform, jedoch nicht vor Eingang der Ware beim Empfänger (bei der wiederkehrenden Lieferung gleichartiger Waren nicht vor Eingang der ersten Teillieferung) und auch nicht vor Erfüllung unserer Informationspflichten gemäß Artikel 246 § 2 in Verbindung mit § 1 Abs. 1 und 2 EGBGB sowie unserer Pflichten gemäß § 312e Abs. 1 Satz 1 BGB in Verbindung mit Artikel 246 § 3 EGBGB. Zur Wahrung der Widerrufsfrist genügt die rechtzeitige Absendung des Widerrufs oder der Sache.<br>
+										<p style=" margin-top: 10px; margin-bottom: 10px;"><strong>Der Widerruf ist zu richten an:</strong></p>
+
+									Liquid-Life GmbH
+									Keffelker Str. 12
+									D-59929 Brilon
+									Fax: 02961/908211
+									E-Mail: info@liquid-life.de
+										<p style=" margin-top: 10px; margin-bottom: 10px;"><strong>Widerrufsfolgen</strong></p>
+									Im Falle eines wirksamen Widerrufs sind die beiderseits empfangenen Leistungen zurückzugewähren und ggf. gezogene Nutzungen (z. B. Zinsen) herauszugeben. Können Sie uns die empfangene Leistung ganz oder teilweise nicht oder nur in verschlechtertem Zustand zurückgewähren, müssen Sie uns insoweit ggf. Wertersatz leisten. Bei der Überlassung von Sachen gilt dies nicht, wenn die Verschlechterung der Sache ausschließlich auf deren Prüfung - wie sie Ihnen etwa im Ladengeschäft möglich gewesen wäre - zurückzuführen ist. Im übrigen können Sie die Pflicht zum Wertersatz für eine durch die bestimmungsgemäße Ingebrauchnahme der Sache entstandene Verschlechterung vermeiden, indem Sie die Sache nicht wie Ihr Eigentum in Gebrauch nehmen und alles unterlassen, was deren Wert beeinträchtigt. Paketversandfähige Sachen sind auf unsere Gefahr zurückzusenden. Sie haben die Kosten der Rücksendung zu tragen, wenn die gelieferte Ware der bestellten entspricht und wenn der Preis der zurückzusendenden Sache einen Betrag von 40 Euro nicht übersteigt oder wenn Sie bei einem höheren Preis der Sache zum Zeitpunkt des Widerrufs noch nicht die Gegenleistung oder eine vertraglich vereinbarte Teilzahlung erbracht haben. Anderenfalls ist die Rücksendung für Sie kostenfrei. Nicht paketversandfähige Sachen werden bei Ihnen abgeholt. Verpflichtungen zur Erstattung von Zahlungen müssen innerhalb von 30 Tagen erfüllt werden. Die Frist beginnt für Sie mit der Absendung Ihrer Widerrufserklärung oder der Sache, für uns mit deren Empfang.
+
+									Finanzierte Geschäfte
+
+									Haben Sie diesen Vertrag durch ein Darlehen finanziert und widerrufen Sie den finanzierten Vertrag, sind Sie auch an den Darlehensvertrag nicht mehr gebunden, wenn beide Verträge eine wirtschaftliche Einheit bilden. Dies ist insbesondere anzunehmen, wenn wir gleichzeitig Ihr Darlehensgeber sind oder wenn sich Ihr Darlehensgeber im Hinblick auf die Finanzierung unserer Mitwirkung bedient. Wenn uns das Darlehen bei Wirksamwerden des Widerrufs oder der Rückgabe bereits zugeflossen ist, tritt Ihr Darlehnsgeber im Verhältnis zu Ihnen hinsichtlich der Rechtsfolgen des Widerrufs oder der Rückgabe in unsere Rechte und Pflichten aus dem finanzierten Vertrag ein. Letzteres gilt nicht, wenn der vorliegende Vertrag den Erwerb von Finanzinstrumenten (z.B. Wertpapieren, Devisen oder Derivaten) zum Gegenstand hat.
+
+									Wollen Sie eine vertragliche Bindung so weitgehend wie möglich vermeiden, widerrufen Sie beide Vertragserklärungen gesondert.
+<br>
+
+<strong>Ende der Widerrufsbelehrung</strong>	
+										</p>		
+									</details>
+	                        </td>
+	                    </tr>
+	                </table>
+	            </td>
+	        </tr>
+	        <!-- 1 Column Text : END -->
+
+	    </table>
+	    <!-- Email Body : END -->
+
+	    <!-- Email Footer : BEGIN -->
+       <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+	                        <tr>
+	                            <td style="padding: 20px; text-align: center; font-family: sans-serif; font-size: 15px; line-height: 20px; background-color: #ffffff; width: 50%;">
+	                                <a class="link1" href="https://www.liquid-life.de/impressum/" target=_blank>Impressum</a> | <a class="link1" href="https://www.liquid-life.de/contacts/" target=_blank>Kontakt</a> | <a class="link1" href="https://www.liquid-life.de/agb/" target=_blank>AGB</a> | <a class="link1" href="https://www.liquid-life.de/datenschutz/" target=_blank>Datenschutz</a>
+	                            </td>
+	                        </tr>
+	                    </table>
+	    <!-- Email Footer : END -->
+
+	    <!-- Full Bleed Background Section : BEGIN -->
+	    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #FFFFFF;">
+	        <tr>
+	            <td>
+	                <div align="center" style="max-width: 600px; margin: auto;" class="email-container">
+	                    <!--[if mso]>
+	                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" align="center">
+	                    <tr>
+	                    <td>
+	                    <![endif]-->
+	                    
+	                    <!--[if mso]>
+	                    </td>
+	                    </tr>
+	                    </table>
+	                    <![endif]-->
+	                </div>
+	            </td>
+	        </tr>
+	    </table>
+	    <!-- Full Bleed Background Section : END -->
+
+    <!--[if mso | IE]>
+    </td>
+    </tr>
+    </table>
+    <![endif]-->
+    </center>
+</body>
+</html>
